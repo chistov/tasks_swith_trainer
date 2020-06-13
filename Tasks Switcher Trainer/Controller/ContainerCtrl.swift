@@ -23,6 +23,14 @@ class ContainerCtrl: UIViewController {
         return .lightContent
     }
     
+//    override var preferredSst: UIStatusBarAnimation {
+//        return .slide
+//    }
+    
+//    override var preferredStatusBarHidden: Bool {
+//        return isExpanded
+//    }
+    
     func configureHomeCtrl(){
         let homeCtrl = HomeCtrl()
         homeCtrl.delegate =  self
@@ -51,30 +59,41 @@ class ContainerCtrl: UIViewController {
                 self.centerCtrl.view.frame.origin.x = self.centerCtrl.view.frame.width - 80
             }, completion: nil)
         } else {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                self.centerCtrl.view.frame.origin.x = 0
-            }, completion: nil)
+            // hide menu
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerCtrl.view.frame.origin.x = 0
             }) { (_) in
                 guard let menuOption = menuOption else { return }
-                self.didSelectMenuOption(menuOption: menuOption)
+                self.didSelectMenuOption(menuOption: menuOption)  // calls only after animation
             }
             
         }
+        
+        animateStatusBar()
     }
     
     func didSelectMenuOption(menuOption: MenuOption){
         switch menuOption {
         case .Math:
-            print("Show profile")
+            let ctrl = MathCtrl()
+            ctrl.param = "This is param!"
+            
+            present(UINavigationController(rootViewController: ctrl), animated: true, completion: nil)
+//            present(ctrl, animated: true, completion: nil)
         case .Shulte:
             print("Show shulte")
         case .Text:
             print("Show profile")
         }
     }
+    
+    func animateStatusBar() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }, completion: nil)
+    }
+    
 }
 
 extension ContainerCtrl: HomeCtrlDelegate {

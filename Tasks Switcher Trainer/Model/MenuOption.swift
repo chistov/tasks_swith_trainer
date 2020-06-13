@@ -20,7 +20,7 @@ enum MenuOption: Int, CustomStringConvertible {
             case .Text: return "Text"
         }
     }
-    
+
     var image: UIImage {
         switch self {
         case .Math: return UIImage(named: "math") ?? UIImage()

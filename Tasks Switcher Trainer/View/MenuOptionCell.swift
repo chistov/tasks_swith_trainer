@@ -31,6 +31,7 @@ class MenuOptionCell: UITableViewCell {
         
         // create properties for cells
         backgroundColor = .darkGray
+        selectionStyle = .none
         
         addSubview(iconImgView)
         iconImgView.translatesAutoresizingMaskIntoConstraints = false
