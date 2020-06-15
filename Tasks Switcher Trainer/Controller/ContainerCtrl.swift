@@ -74,18 +74,20 @@ class ContainerCtrl: UIViewController {
     }
     
     func didSelectMenuOption(menuOption: MenuOption){
+        var ctrl: UIViewController = UIViewController()
         switch menuOption {
         case .Math:
-            let ctrl = MathCtrl()
-            ctrl.param = "This is param!"
-            
-            present(UINavigationController(rootViewController: ctrl), animated: true, completion: nil)
-//            present(ctrl, animated: true, completion: nil)
+            ctrl = MathCtrl()
+//            ctrl.param = "This is param!"
         case .Shulte:
+            ctrl = ShulteCtrl()
             print("Show shulte")
         case .Text:
+            ctrl = ReadCtrl()
             print("Show profile")
         }
+        
+        present(UINavigationController(rootViewController: ctrl), animated: true, completion: nil)
     }
     
     func animateStatusBar() {

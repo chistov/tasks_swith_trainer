@@ -34,9 +34,6 @@ class MathCtrl: UIViewController {
     }
     
     func content(){
-        
-        
-        
         let textField = UITextField()
         textField.textColor = UIColor.red
         textField.text = "String(a1)"
@@ -60,59 +57,62 @@ class MathCtrl: UIViewController {
             @State private var show: Bool = false
 
             var body: some View {
-                VStack {
-                    Button(
-                        action: {
-                            self.show = !self.show
-                        },
-                        label: { Text("Click Me") }
-                    )
-                    
-                    Text(String(a1) + "+" + String(b1))
-                    if show {
-                        Text(String(a1 + b1))
-                    } else {
-                        Text("???")
+                GeometryReader { geometry in
+                    VStack(alignment: .leading) {
+                        Button(
+                            action: {
+                                self.show = !self.show
+                            },
+                            label: { Text("Show result") }
+                        )
+                        
+                        Text(String(self.a1) + "+" + String(self.b1)).padding(.top, 20)
+                        if self.show {
+                            Text(String(self.a1 + self.b1))
+                        } else {
+                            Text("???")
+                        }
+                        
+                        Text(String(self.a2) + "+" + String(self.b2)).padding(.top, 20)
+                        if self.show {
+                            Text(String(self.a2 + self.b2))
+                        } else {
+                            Text("???")
+                        }
+                        
+                        Text(String(self.a3) + "+" + String(self.b3)).padding(.top, 20)
+                        if self.show {
+                            Text(String(self.a3 + self.b3))
+                        } else {
+                            Text("???")
+                        }
+                        
+                        Text(String(self.a4) + "+" + String(self.b4)).padding(.top, 20)
+                        if self.show {
+                            Text(String(self.a4 + self.b4))
+                        } else {
+                            Text("???")
+                        }
+                        
+                        Button(
+                            action: {
+                                self.a1 = Int.random(in: 101...499)
+                                self.b1 = Int.random(in: 101...499)
+                                
+                                self.a2 = Int.random(in: 101...499)
+                                self.b2 = Int.random(in: 101...499)
+                                
+                                self.a3 = Int.random(in: 101...499)
+                                self.b3 = Int.random(in: 101...499)
+                                
+                                self.a4 = Int.random(in: 101...499)
+                                self.b4 = Int.random(in: 101...499)
+                            },
+                            label: { Text("Next") }
+                        ).padding(.top, 20)
                     }
-                    
-                    Text(String(a2) + "+" + String(b2))
-                    if show {
-                        Text(String(a2 + b2))
-                    } else {
-                        Text("???")
-                    }
-                    
-                    Text(String(a3) + "+" + String(b3))
-                    if show {
-                        Text(String(a3 + b3))
-                    } else {
-                        Text("???")
-                    }
-                    
-                    Text(String(a4) + "+" + String(b4))
-                    if show {
-                        Text(String(a4 + b4))
-                    } else {
-                        Text("???")
-                    }
-                    
-                    Button(
-                        action: {
-                            self.a1 = Int.random(in: 101...499)
-                            self.b1 = Int.random(in: 101...499)
-                            
-                            self.a2 = Int.random(in: 101...499)
-                            self.b2 = Int.random(in: 101...499)
-                            
-                            self.a3 = Int.random(in: 101...499)
-                            self.b3 = Int.random(in: 101...499)
-                            
-                            self.a4 = Int.random(in: 101...499)
-                            self.b4 = Int.random(in: 101...499)
-                        },
-                        label: { Text("Next") }
-                    )
                 }
+                
             }
 
         }
